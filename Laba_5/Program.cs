@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Laba_5
 {
@@ -8,59 +9,108 @@ namespace Laba_5
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
 
-            Random rnd = new Random();
+            List<int> x = new List<int>();
+            List<int> y = new List<int>();
+            List<int> z = new List<int>();
 
-            Console.Write("Введіть довжину масивів х, у i z: ");
-            int a = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Оберіть тип введеня масивів: \n1 - з файлу \n2 - з клавіатури\nВаріант: ");
+            string type = Console.ReadLine();
+            int length = 0;
+            int length1 = 0;
 
-            int[] x = new int[a];
-            int[] y = new int[a];
-            int[] z = new int[a];
+            if (type == "1")
+            {
 
-            //Заповнення(заповнення рандомними числами) і вивід масиву х
-            for (int i = 0; i < x.Length; i++)
-                x[i] = rnd.Next(-20, 20);
+            }
 
-            Console.WriteLine("Масив x ");
-            for (int i = 0; i < x.Length; i++)
-                Console.Write(x[i] + ", ");
+            else if (type == "2")
+            {
+                //Заповнення масиву х
+                bool flag_x = true;
+                string temp;
+                
+                do
+                {
+                    Console.WriteLine("Введіть елемент масиву х (щоб закінчити заповнення нажміть Пробіл)");
+                    temp = Console.ReadLine();
 
+                    if (temp == " ")
+                    {
+                        flag_x = false;
+                    }
+                    else
+                    {
+                        x.Add(Convert.ToInt32(temp));
+                        length++;
+                    }
 
-            Console.WriteLine(' ');
+                } while (flag_x);
 
+                //Вивід масиву х
+                Console.WriteLine("Масив x ");
+                foreach (int i in x)
+                    Console.Write(i + ", ");
 
-            //Заповнення(заповнення рандомними числами) і вивід масиву у
-            for (int i = 0; i < y.Length; i++)
-                y[i] = rnd.Next(-20, 20);
+                // Заповнення масиву у
+                bool flag_y = true;
+                Console.WriteLine("\n");
 
-            Console.WriteLine("Масив у:");
-            for (int i = 0; i < y.Length; i++)
-                Console.Write(y[i] + ", ");
+                do
+                {
+                    Console.WriteLine("Введіть елемент масиву y (щоб закінчити заповнення нажміть Пробіл)");
+                    temp = Console.ReadLine();
 
+                    if (temp == " ")
+                    {
+                        flag_y = false;
+                    }
+                    else
+                    {
+                        x.Add(Convert.ToInt32(temp));
+                        length1++;
+                    }
+
+                } while (flag_y);
+
+                //Вивід масиву y
+                Console.WriteLine("Масив y ");
+                foreach (int i in y)
+                    Console.Write(i + ", ");
+
+            }
+            
             Console.WriteLine(" \n ");
 
             Console.WriteLine("Завдання 1. Збільшити парні елементи масиву х вдвічі" + "\n");
 
             //Перебираємо елементи масиву, і кожен парний елемент збільшуємо вдвічі
-            for (int i = 1; i < x.Length; i += 2)
+            for (int i = 0; i < length; i += 2)
                 x[i] *=2 ;
 
             Console.WriteLine("Масив х зі збільшеними елементами: ");
-            for (int i = 0; i < x.Length; i++)
-                Console.Write(x[i] + ", ");
+            foreach (int i in x)
+                Console.Write(i + ", ");
 
 
             Console.WriteLine(" \n ");
 
 
-            Console.WriteLine("Завдання 2. Заповнити масив z, елементи якого є добутком елементів з такимиж індексами із масивів х і у" + "\n");
+            Console.WriteLine("Завдання 2. Заповнити масив z, елементи якого є добутком елементів з такими ж індексами із масивів х і у" + "\n");
             //Заповнення масиву z
-            for (int i = 0; i < z.Length; i++)
-                z[i] = x[i] * y[i];
+
+            int count;
+            if (length > length1)
+                count = length1;
+            else
+                count = length;
+
+            for (int i = 0; i < count; i += 1)
+                z.Insert(i, x[i] * y[i]);
 
             Console.WriteLine("Масив z:");
-            for (int i = 0; i < z.Length; i++)
-                Console.Write(z[i] + ", ");
+            foreach (int i in z)
+                Console.Write(i + ", ");
         }
     }
 }
+
